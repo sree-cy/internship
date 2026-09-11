@@ -1,0 +1,548 @@
+* {
+  box-sizing: border-box;
+}
+
+.landing-page {
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #f8f9ff 0%,
+    #eef0ff 50%,
+    #f8f5ff 100%
+  );
+
+  color: #20284f;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* ================= NAVBAR ================= */
+
+.landing-navbar {
+  height: 78px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid #e5e8f3;
+}
+
+
+.prepgo-logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  font-size: 24px;
+  font-weight: 800;
+  color: #29347d;
+}
+
+
+.prepgo-logo-box {
+  width: 43px;
+  height: 43px;
+
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+
+  background: linear-gradient(
+    135deg,
+    #4659df,
+    #733bc8
+  );
+
+  font-size: 13px;
+}
+
+
+.login-icon-button {
+  width: 45px;
+  height: 45px;
+
+  border-radius: 50%;
+
+  border: 1px solid #dce0ee;
+
+  background: white;
+
+  cursor: pointer;
+
+  font-size: 19px;
+
+  transition: 0.2s;
+}
+
+
+.login-icon-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(60, 70, 150, 0.15);
+}
+
+
+/* ================= HERO ================= */
+
+.landing-hero {
+  min-height: calc(100vh - 78px);
+
+  padding: 60px 8%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 70px;
+}
+
+
+.hero-content {
+  max-width: 620px;
+}
+
+
+.welcome-badge {
+  display: inline-block;
+
+  padding: 9px 16px;
+
+  border-radius: 30px;
+
+  background: #e8ebff;
+
+  color: #4c5bd8;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  margin-bottom: 25px;
+}
+
+
+.hero-content h1 {
+  font-size: 62px;
+
+  line-height: 1.08;
+
+  letter-spacing: -2px;
+
+  margin: 0 0 25px;
+}
+
+
+.hero-content h1 span {
+  background: linear-gradient(
+    90deg,
+    #4055dc,
+    #7139c9
+  );
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+
+.hero-content > p {
+  color: #707895;
+
+  font-size: 17px;
+
+  line-height: 1.7;
+
+  max-width: 560px;
+}
+
+
+/* ================= BUTTONS ================= */
+
+.landing-buttons {
+  display: flex;
+
+  gap: 14px;
+
+  margin-top: 32px;
+}
+
+
+.start-learning-button {
+  padding: 15px 24px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: linear-gradient(
+    90deg,
+    #4055dc,
+    #6637c7
+  );
+
+  color: white;
+
+  font-weight: 700;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+.start-learning-button span {
+  margin-left: 8px;
+}
+
+
+.start-learning-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(72, 79, 190, 0.25);
+}
+
+
+.landing-login-button {
+  padding: 15px 25px;
+
+  border-radius: 10px;
+
+  border: 1px solid #d7dbea;
+
+  background: white;
+
+  color: #424b72;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+/* ================= FEATURES ================= */
+
+.landing-features {
+  display: flex;
+
+  gap: 30px;
+
+  margin-top: 45px;
+}
+
+
+.landing-features div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+.landing-features span {
+  font-size: 20px;
+}
+
+
+.landing-features p {
+  margin: 0;
+
+  font-size: 12px;
+
+  color: #747c98;
+}
+
+
+/* ================= VISUAL ================= */
+
+.landing-visual {
+  width: 440px;
+
+  height: 440px;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+.main-visual-card {
+  width: 320px;
+
+  padding: 40px 30px;
+
+  border-radius: 25px;
+
+  text-align: center;
+
+  background: white;
+
+  box-shadow:
+    0 25px 70px rgba(48, 58, 135, 0.17);
+
+  border: 1px solid #e8eaf4;
+}
+
+
+.visual-logo {
+  width: 75px;
+
+  height: 75px;
+
+  margin: auto;
+
+  border-radius: 21px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: white;
+
+  font-weight: 800;
+
+  font-size: 22px;
+
+  background: linear-gradient(
+    135deg,
+    #4055dc,
+    #7139c9
+  );
+}
+
+
+.main-visual-card h2 {
+  font-size: 28px;
+
+  margin: 20px 0 8px;
+
+  color: #29347d;
+}
+
+
+.main-visual-card p {
+  color: #7d849d;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* ================= PROGRESS ================= */
+
+.visual-progress {
+  margin-top: 28px;
+
+  text-align: left;
+}
+
+
+.progress-text {
+  display: flex;
+
+  justify-content: space-between;
+
+  font-size: 11px;
+
+  margin-bottom: 8px;
+}
+
+
+.progress-text b {
+  color: #5060d9;
+}
+
+
+.progress-background {
+  height: 8px;
+
+  background: #e9ebf5;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+}
+
+
+.progress-fill {
+  height: 100%;
+
+  width: 75%;
+
+  background: linear-gradient(
+    90deg,
+    #4055dc,
+    #7139c9
+  );
+
+  border-radius: 20px;
+}
+
+
+/* ================= FLOATING CARDS ================= */
+
+.floating-card {
+  position: absolute;
+
+  padding: 14px 17px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  background: white;
+
+  border-radius: 13px;
+
+  box-shadow:
+    0 15px 35px rgba(45, 55, 125, 0.13);
+
+  border: 1px solid #e8eaf3;
+}
+
+
+.floating-card > span {
+  font-size: 23px;
+}
+
+
+.floating-card div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+
+.floating-card strong {
+  font-size: 12px;
+}
+
+
+.floating-card small {
+  font-size: 9px;
+
+  color: #8a91a8;
+}
+
+
+.card-one {
+  top: 55px;
+
+  left: 0;
+}
+
+
+.card-two {
+  right: 0;
+
+  bottom: 65px;
+}
+
+
+/* ================= BOTTOM ================= */
+
+.landing-bottom {
+  padding: 18px;
+
+  text-align: center;
+
+  background: white;
+
+  border-top: 1px solid #e7e9f2;
+
+  color: #8a91a8;
+
+  font-size: 12px;
+}
+
+
+.landing-bottom b {
+  margin: 0 15px;
+
+  color: #5261d8;
+}
+
+
+.landing-bottom strong {
+  color: #5261d8;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+
+  .landing-hero {
+    flex-direction: column;
+
+    text-align: center;
+
+    padding-top: 50px;
+  }
+
+
+  .hero-content > p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  .landing-buttons {
+    justify-content: center;
+  }
+
+
+  .landing-features {
+    justify-content: center;
+  }
+
+
+  .landing-visual {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .landing-navbar {
+    padding: 0 20px;
+  }
+
+
+  .hero-content h1 {
+    font-size: 42px;
+  }
+
+
+  .landing-features {
+    flex-wrap: wrap;
+  }
+
+
+  .landing-visual {
+    transform: scale(0.85);
+  }
+
+}

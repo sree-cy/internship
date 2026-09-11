@@ -1,0 +1,297 @@
+@import url(
+  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap'
+);
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.register-page {
+  min-height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f7faf9,
+      #eaf5f1
+    );
+
+  font-family: "Inter", sans-serif;
+}
+
+.register-card {
+  width: 430px;
+
+  padding: 45px;
+
+  background: white;
+
+  border: 1px solid #e3ebe7;
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 20px 60px
+    rgba(30, 60, 50, 0.10);
+}
+
+.register-logo {
+  width: 65px;
+  height: 65px;
+
+  margin: 0 auto 22px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #e4f8f1;
+
+  color: #25bd8c;
+
+  font-size: 23px;
+
+  font-weight: 800;
+}
+
+.register-card h1 {
+  text-align: center;
+
+  color: #17263b;
+
+  font-size: 28px;
+
+  margin-bottom: 9px;
+}
+
+.register-subtitle {
+  text-align: center;
+
+  color: #7c8992;
+
+  font-size: 13px;
+
+  margin-bottom: 32px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #243348;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.input-group input {
+  width: 100%;
+
+  height: 52px;
+
+  padding: 0 15px;
+
+  border: 1px solid #dce5e1;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 13px;
+}
+
+.input-group input:focus {
+  border-color: #25bd8c;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(37,189,140,0.08);
+}
+
+.password-box {
+  display: flex;
+
+  align-items: center;
+
+  border: 1px solid #dce5e1;
+
+  border-radius: 9px;
+
+  overflow: hidden;
+}
+
+.password-box input {
+  border: none;
+
+  flex: 1;
+}
+
+.password-box button {
+  border: none;
+
+  background: white;
+
+  color: #25bd8c;
+
+  padding: 0 14px;
+
+  cursor: pointer;
+}
+
+.register-button {
+  width: 100%;
+
+  height: 54px;
+
+  margin-top: 8px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #27bd8d,
+      #2ac591
+    );
+
+  color: white;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.register-button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+.register-divider {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin: 28px 0 20px;
+
+  color: #8a959d;
+
+  font-size: 11px;
+}
+
+.register-divider::before,
+.register-divider::after {
+  content: "";
+
+  height: 1px;
+
+  flex: 1;
+
+  background: #e2e9e6;
+}
+
+.register-divider span {
+  margin: 0 12px;
+}
+
+.google-button {
+  width: 100%;
+
+  height: 52px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  border: 1px solid #dce5e1;
+
+  border-radius: 9px;
+
+  background: white;
+
+  color: #273548;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+.google-button span {
+  color: #4285f4;
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+.login-link {
+  margin-top: 25px;
+
+  text-align: center;
+
+  color: #7a858e;
+
+  font-size: 12px;
+}
+
+.login-link button {
+  margin-left: 5px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #25bd8c;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+
+  .register-card {
+    width: calc(100% - 30px);
+
+    padding: 30px 25px;
+  }
+
+}
