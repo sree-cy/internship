@@ -1,174 +1,179 @@
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Landing.css";
 
 function Landing() {
-
   const navigate = useNavigate();
 
   return (
     <div className="landing-page">
 
-      {/* NAVBAR */}
-      <nav className="landing-navbar">
+      {/* ================= HEADER ================= */}
 
-        <div className="prepgo-logo">
-          <div className="prepgo-logo-box">
-            PG
-          </div>
+      <header className="landing-header">
 
-          <span>PrepGo</span>
+        <div className="landing-logo">
+          <img
+            src="/prepgo-logo.png"
+            alt="PrepGo Logo"
+          />
         </div>
 
         <button
-          className="login-icon-button"
+          className="header-login-button"
           onClick={() => navigate("/login")}
-          title="Login"
         >
-          👤
+          Login
         </button>
 
-      </nav>
+      </header>
 
 
-      {/* HERO SECTION */}
-      <main className="landing-hero">
+      {/* ================= HERO SECTION ================= */}
 
-        <div className="hero-content">
+      <main className="landing-main">
 
-          <div className="welcome-badge">
-            ✨ Welcome to PrepGo
+        <section className="landing-hero">
+
+          {/* LOGO ABOVE TITLE */}
+
+          <div className="landing-hero-logo">
+            <img
+              src="/prepgo-logo.png"
+              alt="PrepGo"
+            />
           </div>
 
-          <h1>
-            Where Practice
+
+          {/* SMALL LABEL */}
+
+          <div className="landing-label">
+            AI-POWERED INTERVIEW PREPARATION
+          </div>
+
+
+          {/* TITLE */}
+
+          <h1 className="landing-title">
+            Prepare Smarter.
             <br />
-            <span>Meets Opportunity.</span>
+            <span>Interview Better.</span>
           </h1>
 
-          <p>
-            Prepare for your interviews, improve your skills,
-            build confidence and take the next step towards
-            your dream career.
+
+          {/* DESCRIPTION */}
+
+          <p className="landing-description">
+            AI-powered platform to ace your interviews
+            <br />
+            with confidence and clarity.
           </p>
 
 
-          <div className="landing-buttons">
+          {/* MOTTO */}
 
-            <button
-              className="start-learning-button"
-              onClick={() => navigate("/home")}
-            >
-              Start Learning
-              <span>→</span>
-            </button>
+          <p className="landing-motto">
+            Where Practice Meets Opportunity
+          </p>
 
 
-            <button
-              className="landing-login-button"
-              onClick={() => navigate("/login")}
-            >
-              Login
-            </button>
+          {/* BUTTONS */}
+       <div className="landing-buttons">
 
-          </div>
+         <button
+               className="landing-login-button"
+                onClick={() => navigate("/login")}
+                >
+            Login
+        </button>
+
+      </div>
+          
+        </section>
 
 
-          <div className="landing-features">
+        {/* ================= FEATURES ================= */}
 
-            <div>
-              <span>🎯</span>
-              <p>Practice</p>
+        <section className="landing-features">
+
+          <div className="landing-feature-card">
+
+            <div className="feature-icon">
+              🤖
             </div>
 
             <div>
-              <span>🤖</span>
-              <p>AI Feedback</p>
-            </div>
+              <h3>
+                AI Mock Interviews
+              </h3>
 
-            <div>
-              <span>📈</span>
-              <p>Improve</p>
-            </div>
-
-            <div>
-              <span>🚀</span>
-              <p>Grow</p>
-            </div>
-
-          </div>
-
-        </div>
-
-
-        {/* RIGHT SIDE CARD */}
-
-        <div className="landing-visual">
-
-          <div className="floating-card card-one">
-            <span>🎯</span>
-            <div>
-              <strong>Practice</strong>
-              <small>Improve your skills</small>
-            </div>
-          </div>
-
-
-          <div className="main-visual-card">
-
-            <div className="visual-logo">
-              PG
-            </div>
-
-            <h2>PrepGo</h2>
-
-            <p>
-              Your journey to interview success
-              starts here.
-            </p>
-
-            <div className="visual-progress">
-
-              <div className="progress-text">
-                <span>Interview Readiness</span>
-                <b>75%</b>
-              </div>
-
-              <div className="progress-background">
-                <div className="progress-fill"></div>
-              </div>
-
+              <p>
+                Practice realistic interviews
+                with AI-powered simulations.
+              </p>
             </div>
 
           </div>
 
 
-          <div className="floating-card card-two">
-            <span>🚀</span>
-            <div>
-              <strong>Opportunity</strong>
-              <small>Build your future</small>
+          <div className="landing-feature-card">
+
+            <div className="feature-icon">
+              ✦
             </div>
+
+            <div>
+              <h3>
+                Smart Feedback
+              </h3>
+
+              <p>
+                Get useful feedback and improve
+                your interview performance.
+              </p>
+            </div>
+
           </div>
 
-        </div>
+
+          <div className="landing-feature-card">
+
+            <div className="feature-icon">
+              📊
+            </div>
+
+            <div>
+              <h3>
+                Track Progress
+              </h3>
+
+              <p>
+                Monitor your preparation and
+                improve your skills.
+              </p>
+            </div>
+
+          </div>
+
+        </section>
 
       </main>
 
 
-      {/* BOTTOM TEXT */}
+      {/* ================= FOOTER ================= */}
 
-      <div className="landing-bottom">
+      <footer className="landing-footer">
 
-        <span>Practice</span>
-        <b>→</b>
-        <span>Improve</span>
-        <b>→</b>
-        <span>Grow</span>
-        <b>→</b>
-        <strong>Succeed</strong>
+        <span>
+          © 2026 PrepGo
+        </span>
 
-      </div>
+        <span>
+          Where Practice Meets Opportunity
+        </span>
+
+      </footer>
 
     </div>
   );
