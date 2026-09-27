@@ -1,0 +1,352 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* =========================================
+   PREPGO - APTITUDE RESULT PAGE
+========================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.result-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0b0f19 0%, #1e1b4b 50%, #0f172a 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Celebration Ambient Glow & Sparkle Orbs */
+.result-page::before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(99, 102, 241, 0.15) 50%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  animation: celebrateFloat 8s ease-in-out infinite alternate;
+}
+
+.result-page::after {
+  content: "";
+  position: absolute;
+  bottom: 10%;
+  right: 25%;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, rgba(6, 182, 212, 0.15) 50%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  animation: celebrateFloat 10s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes celebrateFloat {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-30px) scale(1.1); }
+}
+
+/* =========================================
+   RESULT CARD (GLASSMORPHISM)
+========================================= */
+
+.result-card {
+  width: 100%;
+  max-width: 540px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 28px;
+  padding: 44px 38px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 
+    0 10px 15px -3px rgba(15, 23, 42, 0.05),
+    0 25px 60px -12px rgba(99, 102, 241, 0.2),
+    0 0 0 1px rgba(226, 232, 240, 0.8);
+  position: relative;
+  z-index: 2;
+  animation: resultPop 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes resultPop {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.result-card h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.level {
+  display: inline-block;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 5px 16px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  border: 1px solid #e0e7ff;
+}
+
+/* =========================================
+   CIRCULAR SCORE PROGRESS
+========================================= */
+
+.percentage-circle {
+  width: 154px;
+  height: 154px;
+  margin: 0 auto 32px;
+  border-radius: 50%;
+  border: 10px solid #4f46e5;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 
+    0 12px 30px -4px rgba(79, 70, 229, 0.35),
+    inset 0 2px 6px rgba(0, 0, 0, 0.06);
+  position: relative;
+  animation: circlePulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes circlePulse {
+  0% { transform: scale(1); box-shadow: 0 12px 30px -4px rgba(79, 70, 229, 0.35); }
+  100% { transform: scale(1.03); box-shadow: 0 16px 36px -4px rgba(79, 70, 229, 0.5); }
+}
+
+.percentage-circle span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 38px;
+  font-weight: 800;
+  color: #4f46e5;
+  letter-spacing: -1px;
+}
+
+/* =========================================
+   COLORFUL STATISTIC CARDS
+========================================= */
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.result-box {
+  border-radius: 16px;
+  padding: 16px 12px;
+  transition: all 0.25s ease;
+  border: 1.5px solid transparent;
+}
+
+.result-box:hover {
+  transform: translateY(-2px);
+}
+
+.result-box h3 {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.result-box p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0;
+}
+
+/* Score Card (Indigo) */
+.result-box:nth-child(1) {
+  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+  border-color: #ddd6fe;
+}
+.result-box:nth-child(1) h3 { color: #6d28d9; }
+.result-box:nth-child(1) p { color: #4c1d95; }
+
+/* Correct Card (Emerald) */
+.result-box:nth-child(2) {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border-color: #a7f3d0;
+}
+.result-box:nth-child(2) h3 { color: #059669; }
+.result-box:nth-child(2) p { color: #065f46; }
+
+/* Wrong Card (Rose) */
+.result-box:nth-child(3) {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border-color: #fecaca;
+}
+.result-box:nth-child(3) h3 { color: #dc2626; }
+.result-box:nth-child(3) p { color: #991b1b; }
+
+/* =========================================
+   PERFORMANCE BADGE
+========================================= */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  color: #065f46;
+  border: 1.5px solid #a7f3d0;
+  padding: 10px 24px;
+  border-radius: 24px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 28px;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+}
+
+.badge::before {
+  content: "🏆";
+  font-size: 16px;
+}
+
+/* =========================================
+   DASHBOARD BUTTON
+========================================= */
+
+.dashboard-btn {
+  width: 100%;
+  height: 52px;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.dashboard-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.55);
+  filter: brightness(1.06);
+}
+
+.dashboard-btn:hover::before {
+  left: 100%;
+}
+
+.dashboard-btn:active {
+  transform: translateY(0);
+}
+
+/* =========================================
+   FALLBACK / RESULT BUTTONS (IF NO STATE)
+========================================= */
+
+.result-page h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.result-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.result-buttons button {
+  padding: 13px 26px;
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #1e293b;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.result-buttons button:hover {
+  transform: translateY(-2px);
+  background: #f8fafc;
+}
+
+.result-buttons button:last-child {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: #ffffff;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 580px) {
+  .result-card {
+    padding: 32px 20px;
+    border-radius: 22px;
+  }
+
+  .result-card h1 {
+    font-size: 24px;
+  }
+
+  .percentage-circle {
+    width: 130px;
+    height: 130px;
+    border-width: 8px;
+  }
+
+  .percentage-circle span {
+    font-size: 30px;
+  }
+
+  .result-box p {
+    font-size: 18px;
+  }
+}

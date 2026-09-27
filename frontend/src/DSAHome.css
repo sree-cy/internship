@@ -1,0 +1,543 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* =========================================
+   PREPGO - ROUND 2 (DSA) HOME
+========================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.dsa-home-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #f1f5f9 100%);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #0f172a;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* =========================================
+   TOP NAVBAR
+========================================= */
+
+.dsa-navbar {
+  height: 76px;
+  padding: 0 6%;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+}
+
+.dsa-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.dsa-logo-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  box-shadow: 0 6px 16px -2px rgba(79, 70, 229, 0.4);
+}
+
+.dsa-nav-title h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.dsa-nav-title span {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.dsa-nav-center {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #f8fafc;
+  padding: 8px 20px;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+}
+
+.nav-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.metric-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #64748b;
+}
+
+.metric-val {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.metric-divider {
+  width: 1px;
+  height: 24px;
+  background: #cbd5e1;
+}
+
+.dsa-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.back-dashboard-btn {
+  padding: 8px 16px;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  border-radius: 10px;
+  color: #475569;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-dashboard-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+.candidate-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.candidate-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.candidate-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.candidate-info strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.candidate-info span {
+  font-size: 10px;
+  color: #64748b;
+}
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.dsa-main-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 50px 24px 70px;
+}
+
+.dsa-hero-header {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.sub-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #0284c7;
+  background: #e0f2fe;
+  padding: 5px 16px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+  border: 1px solid #bae6fd;
+}
+
+.dsa-hero-header h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.dsa-hero-header p {
+  color: #64748b;
+  font-size: 15px;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* =========================================
+   3 DIFFICULTY CARDS (EASY, MEDIUM, HARD)
+========================================= */
+
+.dsa-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-bottom: 40px;
+}
+
+.dsa-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 32px 26px;
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.dsa-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px -10px rgba(15, 23, 42, 0.12);
+}
+
+.dsa-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+}
+
+/* THEMES: EASY (GREEN) */
+.dsa-card.easy::before {
+  background: linear-gradient(90deg, #10b981, #34d399);
+}
+.dsa-card.easy:hover {
+  border-color: #a7f3d0;
+}
+.dsa-card.easy .mode-badge {
+  background: #dcfce7;
+  color: #065f46;
+}
+.dsa-card.easy .start-mode-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 8px 20px -4px rgba(16, 185, 129, 0.45);
+}
+
+/* THEMES: MEDIUM (ORANGE) */
+.dsa-card.medium::before {
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+}
+.dsa-card.medium:hover {
+  border-color: #fde68a;
+}
+.dsa-card.medium .mode-badge {
+  background: #fef3c7;
+  color: #92400e;
+}
+.dsa-card.medium .start-mode-btn {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  box-shadow: 0 8px 20px -4px rgba(245, 158, 11, 0.45);
+}
+
+/* THEMES: HARD (RED) */
+.dsa-card.hard::before {
+  background: linear-gradient(90deg, #ef4444, #f87171);
+}
+.dsa-card.hard:hover {
+  border-color: #fecaca;
+}
+.dsa-card.hard .mode-badge {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.dsa-card.hard .start-mode-btn {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  box-shadow: 0 8px 20px -4px rgba(239, 68, 68, 0.45);
+}
+
+.card-top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.mode-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.timer-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.dsa-card h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 18px;
+}
+
+.dsa-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.metric-box {
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  padding: 10px 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.m-label {
+  font-size: 9px;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.m-value {
+  font-size: 11px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* LANGUAGE SUPPORT PILL */
+.lang-support-pill {
+  background: #f1f5f9;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 11px;
+  color: #475569;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.lang-support-pill strong {
+  color: #1e293b;
+}
+
+/* TOPICS COVERED PREVIEW */
+.topics-preview-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.topics-title {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.topics-tags-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.topic-chip {
+  font-size: 11px;
+  font-weight: 600;
+  background: #ffffff;
+  color: #334155;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.topic-chip:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+/* REVEAL NOTICE BOX */
+.reveal-notice-box {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reveal-notice-box .lock-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.reveal-notice-box p {
+  font-size: 12px;
+  font-weight: 600;
+  color: #92400e;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* BUTTON */
+.start-mode-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-mode-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+
+/* =========================================
+   BOTTOM TIP SECTION
+========================================= */
+
+.dsa-tip-section {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+}
+
+.tip-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #fef3c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.tip-content h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+
+.tip-content p {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 1050px) {
+  .dsa-cards-grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .dsa-nav-center {
+    display: none;
+  }
+}
+
+@media (max-width: 550px) {
+  .dsa-navbar {
+    padding: 0 16px;
+  }
+
+  .dsa-hero-header h1 {
+    font-size: 28px;
+  }
+
+  .candidate-info {
+    display: none;
+  }
+}

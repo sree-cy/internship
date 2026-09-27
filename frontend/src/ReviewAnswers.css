@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* =========================================
+   PREPGO - REVIEW ANSWERS PAGE
+========================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.review-page {
+  min-height: 100vh;
+  padding: 50px 6%;
+  background: #f8fafc;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.review-page::before {
+  content: "EXAM ANALYSIS • ROUND 1";
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #4f46e5;
+  background: #e0e7ff;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.review-page h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  color: #0f172a;
+  margin-bottom: 35px;
+}
+
+/* =========================================
+   REVIEW QUESTION CARDS
+========================================= */
+
+.review-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 22px;
+  padding: 34px 30px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.review-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.06);
+}
+
+.review-card h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* =========================================
+   OPTIONS: CORRECT & WRONG ANSWERS
+========================================= */
+
+.review-option {
+  padding: 16px 20px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #475569;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+/* CORRECT ANSWER (GREEN THEME) */
+.review-option.correct {
+  background: #ecfdf5;
+  border-color: #10b981;
+  color: #065f46;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.15);
+}
+
+.review-option.correct::after {
+  content: "✓ Correct Answer";
+  font-size: 11px;
+  font-weight: 700;
+  color: #059669;
+  background: #d1fae5;
+  padding: 4px 10px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+/* WRONG ANSWER (RED THEME) */
+.review-option.wrong {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #991b1b;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(239, 68, 68, 0.15);
+}
+
+.review-option.wrong::after {
+  content: "✕ Your Answer";
+  font-size: 11px;
+  font-weight: 700;
+  color: #dc2626;
+  background: #fee2e2;
+  padding: 4px 10px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+/* =========================================
+   STICKY BACK TO DASHBOARD BUTTON
+========================================= */
+
+.review-page > button {
+  position: sticky;
+  bottom: 25px;
+  margin: 36px auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 240px;
+  height: 52px;
+  padding: 0 32px;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.45);
+  z-index: 10;
+}
+
+.review-page > button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.55);
+  filter: brightness(1.06);
+}
+
+.review-page > button:active {
+  transform: translateY(0);
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 600px) {
+  .review-page {
+    padding: 30px 16px;
+  }
+
+  .review-page h1 {
+    font-size: 26px;
+  }
+
+  .review-card {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .review-option {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .review-page > button {
+    width: 100%;
+  }
+}

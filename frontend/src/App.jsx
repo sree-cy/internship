@@ -1,36 +1,43 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import AptitudeHome from "./AptitudeHome";
+import AptitudeInstructions from "./AptitudeInstructions";
+import AptitudeTest from "./AptitudeTest";
+import AptitudeResult from "./AptitudeResult";
+import ReviewAnswers from "./ReviewAnswers";
+
+import DSAHome from "./DSAHome";
+import DSAInstructions from "./DSAInstructions";
+import DSATest from "./DSATest";
+import DSAResult from "./DSAResult";
 
 import Login from "./Login";
 import Register from "./Register";
 import Home from "./Home";
-import Practice from "./Practice";
 
 function App() {
   return (
     <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/home" element={<Home />} />
 
-      <Route
-        path="/"
-        element={<Login/>}
-      />
+      {/* Redirect /practice to Round 1 */}
+      <Route path="/practice" element={<Navigate to="/aptitude" replace />} />
 
-      <Route
-        path="/login"
-        element={<Login/>}
-      />
+      {/* Round 1 (Aptitude) */}
+      <Route path="/aptitude" element={<AptitudeHome />} />
+      <Route path="/aptitude/instructions/:level" element={<AptitudeInstructions />} />
+      <Route path="/aptitude/test/:level" element={<AptitudeTest />} />
+      <Route path="/aptitude/result" element={<AptitudeResult />} />
+      <Route path="/aptitude/review" element={<ReviewAnswers />} />
 
-      <Route
-        path="/register"
-        element={<Register/>}
-      />
-
-      <Route
-        path="/home"
-        element={<Home />}
-      />
-      
-      <Route path="/practice" element={<Practice/>} />
+      {/* Round 2 (DSA) */}
+      <Route path="/dsa" element={<DSAHome />} />
+      <Route path="/dsa/instructions/:level" element={<DSAInstructions />} />
+      <Route path="/dsa/test/:level" element={<DSATest />} />
+      <Route path="/dsa/result" element={<DSAResult />} />
     </Routes>
   );
 }

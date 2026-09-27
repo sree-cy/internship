@@ -1,0 +1,315 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* =========================================
+   PREPGO - DSA INSTRUCTIONS
+========================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.dsa-instructions-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  background: linear-gradient(135deg, #0b0f19 0%, #1e1b4b 50%, #0f172a 100%);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background Ambient Orbs */
+.dsa-instructions-page::before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  width: 500px;
+  height: 500px;
+  filter: blur(90px);
+  pointer-events: none;
+}
+
+.dsa-instructions-page.easy::before {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
+}
+
+.dsa-instructions-page.medium::before {
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, transparent 70%);
+}
+
+.dsa-instructions-page.hard::before {
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.25) 0%, transparent 70%);
+}
+
+/* =========================================
+   CARD
+========================================= */
+
+.instructions-card {
+  width: 100%;
+  max-width: 780px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 26px;
+  padding: 44px 40px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.35);
+  position: relative;
+  z-index: 2;
+  animation: fadeInInstr 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes fadeInInstr {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.instructions-badge-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.round-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #4f46e5;
+  background: #eef2ff;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+.diff-tag {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+.easy .diff-tag {
+  background: #dcfce7;
+  color: #065f46;
+}
+
+.medium .diff-tag {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.hard .diff-tag {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.instructions-card h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.instructions-card .subtitle {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+/* =========================================
+   METRICS GRID
+========================================= */
+
+.instructions-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.instr-metric-card {
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 14px 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.instr-metric-card:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+}
+
+.instr-metric-card .icon {
+  font-size: 20px;
+}
+
+.instr-metric-card .label {
+  font-size: 9px;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.8px;
+}
+
+.instr-metric-card strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.instr-metric-card.full-width {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 18px;
+}
+
+/* Theme accent highlights */
+.easy .instr-metric-card:hover { border-color: #a7f3d0; }
+.medium .instr-metric-card:hover { border-color: #fde68a; }
+.hard .instr-metric-card:hover { border-color: #fecaca; }
+
+/* =========================================
+   RULES LIST
+========================================= */
+
+.rules-section h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 14px;
+}
+
+.rules-section ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.rules-section li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #334155;
+}
+
+.rules-section li::before {
+  content: "✦";
+  position: absolute;
+  left: 6px;
+  top: 0;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.easy .rules-section li::before { color: #10b981; }
+.medium .rules-section li::before { color: #f59e0b; }
+.hard .rules-section li::before { color: #ef4444; }
+
+/* =========================================
+   ACTION BUTTONS
+========================================= */
+
+.instructions-action-row {
+  display: flex;
+  gap: 14px;
+}
+
+.back-btn {
+  padding: 14px 24px;
+  border-radius: 14px;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  color: #475569;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.start-assessment-btn {
+  flex: 1;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 14px;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.easy .start-assessment-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 8px 20px -4px rgba(16, 185, 129, 0.45);
+}
+
+.medium .start-assessment-btn {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  box-shadow: 0 8px 20px -4px rgba(245, 158, 11, 0.45);
+}
+
+.hard .start-assessment-btn {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  box-shadow: 0 8px 20px -4px rgba(239, 68, 68, 0.45);
+}
+
+.start-assessment-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 650px) {
+  .instructions-card {
+    padding: 28px 20px;
+  }
+
+  .instructions-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .instructions-action-row {
+    flex-direction: column;
+  }
+}

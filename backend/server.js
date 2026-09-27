@@ -1,14 +1,14 @@
 const express = require("express");
-const questionRoutes = require("./routes/questionRoutes");
-const attemptRoutes = require("./routes/attemptRoutes");
-const questionSetRoutes = require("./routes/questionSetRoutes");
-const answerRoutes = require("./routes/answerRoutes");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const path = require("path");
 
 const connectDB = require("./config/db");
+const authRoutes = require("./routes/authRoutes");
+const aptitudeRoutes = require("./routes/aptitudeRoutes");
+const dsaRoutes = require("./routes/dsaRoutes");
 
-dotenv.config();
+dotenv.config({ path: path.join(__dirname, ".env") });
 
 connectDB();
 
@@ -24,22 +24,11 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use(
-  "/api/auth",
-  require("./routes/authRoutes")
-);
+// Dedicated active modules
+app.use("/api/auth", authRoutes);
+app.use("/api/aptitude", aptitudeRoutes);
+app.use("/api/dsa", dsaRoutes);
 
-
-app.use("/api/questions", questionRoutes);
-
-
-app.use(
-  "/api/attempts",
-  attemptRoutes
-);
-
-app.use("/api/question-sets", questionSetRoutes);
-app.use("/api/answers", answerRoutes);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, "0.0.0.0", () => {

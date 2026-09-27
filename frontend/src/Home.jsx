@@ -1,9 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
 function Home() {
   const navigate = useNavigate();
+  const [latestAttempt, setLatestAttempt] = useState(null);
+  const [latestDSAAttempt, setLatestDSAAttempt] = useState(null);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    try {
+      const storedUser = localStorage.getItem("prepgoUser");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    } catch (e) {
+      console.error("Error reading stored user:", e);
+    }
+
+    const fetchLatestAttempts = async () => {
+      try {
+        const [aptRes, dsaRes] = await Promise.all([
+          fetch("http://localhost:5000/api/aptitude/latest-attempt").then((r) => r.json()),
+          fetch("http://localhost:5000/api/dsa/latest-attempt").then((r) => r.json()),
+        ]);
+
+        if (aptRes.success && aptRes.attempt) {
+          setLatestAttempt(aptRes.attempt);
+        }
+        if (dsaRes.success && dsaRes.attempt) {
+          setLatestDSAAttempt(dsaRes.attempt);
+        }
+      } catch (err) {
+        console.error("Failed to load latest attempts:", err);
+      }
+    };
+
+    fetchLatestAttempts();
+  }, []);
 
   return (
     <div className="home-page">
@@ -105,12 +139,12 @@ function Home() {
             </div>
 
             <div className="profile-circle">
-              H
+              {user?.name ? user.name.charAt(0).toUpperCase() : "H"}
             </div>
 
             <div className="profile-details">
-              <strong>Hema</strong>
-              <span>Student</span>
+              <strong>{user?.name || "Hema"}</strong>
+              <span>{user?.email || "Student"}</span>
             </div>
 
           </div>
@@ -138,9 +172,9 @@ function Home() {
               Prepare yourself for your dream interview.
             </p>
 
-            {/* CONNECTED TO PRACTICE PAGE */}
+            {/* CONNECTED TO APTITUDE ROUND 1 */}
             <button
-              onClick={() => navigate("/practice")}
+              onClick={() => navigate("/aptitude")}
               className="practice-button"
             >
               Start Practicing →
@@ -267,9 +301,38 @@ function Home() {
                 <span>⏱️ 20 Minutes</span>
               </div>
 
+              {latestAttempt && (
+                <div className="latest-attempt-box">
+                  <div className="attempt-badge-header">
+                    <span className="attempt-tag">LATEST ATTEMPT</span>
+                    <span className="attempt-date">
+                      {new Date(latestAttempt.completedAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                  <div className="attempt-metrics">
+                    <div>
+                      <strong>Difficulty:</strong>{" "}
+                      <span className="diff-pill">
+                        {latestAttempt.difficulty.toUpperCase()}
+                      </span>
+                    </div>
+                    <div>
+                      <strong>Score:</strong> {latestAttempt.score} / 60
+                    </div>
+                    <div>
+                      <strong>Percentage:</strong>{" "}
+                      <span className="perc-pill">
+                        {latestAttempt.percentage}%
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* CONNECTED */}
               <button
-                onClick={() => navigate("/practice")}
+                className="start-btn"
+                onClick={() => navigate("/aptitude")}
               >
                 Start Round 1 →
               </button>
@@ -299,12 +362,42 @@ function Home() {
               </p>
 
               <div className="round-info">
-                <span>📝 15 Questions</span>
-                <span>⏱️ 30 Minutes</span>
+                <span>📝 2 Problems</span>
+                <span>⏱️ 15–60 Mins</span>
               </div>
 
+              {latestDSAAttempt && (
+                <div className="latest-attempt-box dsa-attempt-box">
+                  <div className="attempt-badge-header">
+                    <span className="attempt-tag blue">DSA Progress</span>
+                    <span className="attempt-date">
+                      {new Date(latestDSAAttempt.completedAt).toDateString() === new Date().toDateString()
+                        ? "Completed Today"
+                        : new Date(latestDSAAttempt.completedAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                  <div className="attempt-metrics">
+                    <div>
+                      <strong>Difficulty:</strong>{" "}
+                      <span className="diff-pill blue">
+                        {latestDSAAttempt.difficulty ? latestDSAAttempt.difficulty.toUpperCase() : "EASY"}
+                      </span>
+                    </div>
+                    <div>
+                      <strong>Score:</strong> {latestDSAAttempt.score} / 60
+                    </div>
+                    <div>
+                      <strong>Percentage:</strong>{" "}
+                      <span className="perc-pill blue">
+                        {latestDSAAttempt.percentage}%
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <button
-                onClick={() => navigate("/practice")}
+                onClick={() => navigate("/dsa")}
               >
                 Start Round 2 →
               </button>
@@ -339,7 +432,7 @@ function Home() {
               </div>
 
               <button
-                onClick={() => navigate("/practice")}
+                onClick={() => alert("Round 3 (HR Interview) is coming soon!")}
               >
                 Start Round 3 →
               </button>
@@ -481,9 +574,9 @@ function Home() {
               </button>
 
 
-              {/* CONNECTED */}
+              {/* CONNECTED TO APTITUDE */}
               <button
-                onClick={() => navigate("/practice")}
+                onClick={() => navigate("/aptitude")}
               >
                 📖
                 <span>Practice Questions</span>
