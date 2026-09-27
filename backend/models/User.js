@@ -18,13 +18,52 @@ const userSchema = new mongoose.Schema(
 
     password: {
       type: String,
-      required: true,
-      minlength: 6,
+      default: null,
+    },
+
+    googleId: {
+      type: String,
+      default: null,
     },
 
     profileImage: {
       type: String,
       default: "",
+    },
+
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+
+    otp: {
+      type: String,
+      default: null,
+    },
+
+    otpExpiry: {
+      type: Date,
+      default: null,
+    },
+
+    lastOtpSentAt: {
+      type: Date,
+      default: null,
+    },
+
+    resetOtp: {
+      type: String,
+      default: null,
+    },
+
+    resetOtpExpiry: {
+      type: Date,
+      default: null,
+    },
+
+    lastResetOtpSentAt: {
+      type: Date,
+      default: null,
     },
   },
 

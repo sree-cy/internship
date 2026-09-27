@@ -13,6 +13,10 @@ import DSAResult from "./DSAResult";
 
 import Login from "./Login";
 import Register from "./Register";
+import VerifyEmail from "./VerifyEmail";
+import ForgotPassword from "./ForgotPassword";
+import VerifyResetOTP from "./VerifyResetOTP";
+import ResetPassword from "./ResetPassword";
 import Home from "./Home";
 
 function App() {
@@ -21,6 +25,10 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/verify-email" element={<VerifyEmail />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/verify-reset-otp" element={<VerifyResetOTP />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/home" element={<Home />} />
 
       {/* Redirect /practice to Round 1 */}

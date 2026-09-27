@@ -354,6 +354,30 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.google-overlay-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  overflow: hidden;
+  opacity: 0.001;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.google-overlay-wrapper iframe {
+  width: 100% !important;
+  height: 100% !important;
+  transform: scale(1.6);
+  transform-origin: center center;
+  cursor: pointer !important;
+}
+
 /* =========================================
    LOGIN LINK
 ========================================= */
