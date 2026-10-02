@@ -17,7 +17,7 @@ function VerifyResetOTP() {
   const [countdown, setCountdown] = useState(60);
   const [canResend, setCanResend] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const [successMsg, setSuccessMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState(location.state?.message || "");
 
   const inputRefs = useRef([]);
 
@@ -137,7 +137,7 @@ function VerifyResetOTP() {
         email: email.trim().toLowerCase(),
       });
 
-      setSuccessMsg(response.data.message || "A new reset code has been sent!");
+      setSuccessMsg("Verification code sent to your email.");
       setCountdown(60);
       setCanResend(false);
       setOtp(["", "", "", "", "", ""]);
@@ -240,7 +240,7 @@ function VerifyResetOTP() {
               onClick={handleResend}
               disabled={resending}
             >
-              {resending ? "Sending..." : "Resend Code"}
+              {resending ? "Sending verification code..." : "Resend Code"}
             </button>
           ) : (
             <span className="countdown-badge">

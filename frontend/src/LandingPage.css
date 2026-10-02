@@ -1,0 +1,217 @@
+/* ===================================================
+   PrepGo Simple Public Landing Page Styles
+   Theme: Green + White Modern Minimal Design System
+=================================================== */
+
+.landing-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 60%, #f0fdf4 100%);
+  color: var(--text-primary, #0f172a);
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+}
+
+/* ================= HEADER ================= */
+.landing-header {
+  height: 76px;
+  padding: 0 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border, #e2e8f0);
+}
+
+.landing-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.landing-brand-logo {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--primary-green, #16a34a) 0%, var(--primary-green-dark, #15803d) 100%);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 17px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.25);
+}
+
+.landing-brand-name {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary, #0f172a);
+  letter-spacing: -0.5px;
+}
+
+.header-login-btn {
+  background: #ffffff;
+  color: var(--primary-green-dark, #15803d);
+  border: 1.5px solid var(--primary-green-border, #bbf7d0);
+  padding: 8px 18px;
+  font-size: 14.5px;
+  font-weight: 600;
+  border-radius: var(--radius-sm, 8px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.header-login-btn:hover {
+  background: var(--primary-green-subtle, #f0fdf4);
+  border-color: var(--primary-green, #16a34a);
+  color: var(--primary-green-dark, #15803d);
+}
+
+/* ================= HERO ================= */
+.landing-hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px 64px;
+}
+
+.landing-hero-content {
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing-label {
+  display: inline-block;
+  padding: 7px 18px;
+  background-color: var(--primary-green-subtle, #f0fdf4);
+  border: 1px solid var(--primary-green-border, #bbf7d0);
+  color: var(--primary-green-dark, #15803d);
+  border-radius: 9999px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.landing-title {
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -1.8px;
+  color: var(--text-primary, #0f172a);
+  margin: 0 0 24px 0;
+}
+
+.landing-title span {
+  color: var(--primary-green, #16a34a);
+}
+
+.landing-description {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--text-secondary, #475569);
+  margin: 0 0 36px 0;
+  max-width: 580px;
+}
+
+/* ================= BUTTONS ================= */
+.landing-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.landing-btn-primary {
+  background-color: var(--primary-green, #16a34a);
+  color: #ffffff;
+  border: none;
+  padding: 14px 30px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: var(--radius-sm, 8px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.28);
+}
+
+.landing-btn-primary:hover {
+  background-color: var(--primary-green-dark, #15803d);
+  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.35);
+  transform: translateY(-1px);
+}
+
+.landing-btn-secondary {
+  background-color: #ffffff;
+  color: var(--text-primary, #0f172a);
+  border: 1.5px solid var(--border, #e2e8f0);
+  padding: 13px 26px;
+  font-size: 15.5px;
+  font-weight: 600;
+  border-radius: var(--radius-sm, 8px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.landing-btn-secondary:hover {
+  border-color: var(--primary-green, #16a34a);
+  color: var(--primary-green-dark, #15803d);
+  background-color: var(--primary-green-subtle, #f0fdf4);
+}
+
+/* ================= SUPPORTING TEXT ================= */
+.landing-supporting-text {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-muted, #94a3b8);
+  letter-spacing: 0.3px;
+  margin: 0;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .landing-header {
+    padding: 0 20px;
+    height: 68px;
+  }
+
+  .landing-title {
+    font-size: 38px;
+    letter-spacing: -1px;
+  }
+
+  .landing-description {
+    font-size: 15.5px;
+  }
+
+  .landing-hero {
+    padding: 36px 20px 48px;
+  }
+
+  .landing-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .landing-btn-primary,
+  .landing-btn-secondary {
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+  }
+}

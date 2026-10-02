@@ -31,6 +31,36 @@ const userSchema = new mongoose.Schema(
       default: "",
     },
 
+    phone: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    education: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    targetRole: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    skillLevel: {
+      type: String,
+      default: "Beginner",
+      enum: ["Beginner", "Intermediate", "Advanced"],
+    },
+
+    preferredLanguage: {
+      type: String,
+      default: "Python",
+      enum: ["Python", "Java", "C++", "C", "JavaScript"],
+    },
+
     isVerified: {
       type: Boolean,
       default: false,

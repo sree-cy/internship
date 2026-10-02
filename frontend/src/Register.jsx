@@ -177,7 +177,10 @@ function Register() {
       );
 
       navigate("/verify-email", {
-        state: { email },
+        state: { 
+          email,
+          message: "Verification code sent to your email."
+        },
       });
 
     } catch (error) {
@@ -219,6 +222,7 @@ function Register() {
             <input
               type="text"
               name="name"
+              className="register-input"
               placeholder="Enter your name"
               required
             />
@@ -234,6 +238,7 @@ function Register() {
             <input
               type="email"
               name="email"
+              className="register-input"
               placeholder="Enter your email"
               required
             />
@@ -255,6 +260,7 @@ function Register() {
                     : "password"
                 }
                 name="password"
+                className="register-input"
                 placeholder="Create a password"
                 required
               />
@@ -280,7 +286,7 @@ function Register() {
             disabled={loading}
           >
             {loading
-              ? "Creating Account..."
+              ? "Sending verification code..."
               : "Create Account →"}
           </button>
 

@@ -119,6 +119,14 @@ const googleAuth = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        phone: user.phone || "",
+        education: user.education || "",
+        targetRole: user.targetRole || "",
+        skillLevel: user.skillLevel || "Beginner",
+        preferredLanguage: user.preferredLanguage || "Python",
+        profileImage: user.profileImage || "",
+        isVerified: user.isVerified,
+        authProvider: "Google",
       },
     });
 

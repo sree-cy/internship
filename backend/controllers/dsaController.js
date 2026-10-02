@@ -136,7 +136,7 @@ function executeCode(language = "python", code, inputString = "", timeoutMs = 40
       const binPath = path.join(tmpDir, "solution");
       fs.writeFileSync(srcPath, code);
 
-      exec(`gcc -O2 "${srcPath}" -o "${binPath}" -lm`, { timeout: 4000 }, (compileErr, compStdout, compStderr) => {
+      exec(`gcc "${srcPath}" -o "${binPath}" -lm`, { timeout: 12000 }, (compileErr, compStdout, compStderr) => {
         if (compileErr) {
           cleanup();
           return resolve({
@@ -156,7 +156,7 @@ function executeCode(language = "python", code, inputString = "", timeoutMs = 40
       const binPath = path.join(tmpDir, "solution");
       fs.writeFileSync(srcPath, code);
 
-      exec(`g++ -O2 -std=c++17 "${srcPath}" -o "${binPath}"`, { timeout: 4000 }, (compileErr, compStdout, compStderr) => {
+      exec(`g++ -std=c++17 "${srcPath}" -o "${binPath}"`, { timeout: 12000 }, (compileErr, compStdout, compStderr) => {
         if (compileErr) {
           cleanup();
           return resolve({
@@ -185,7 +185,7 @@ function executeCode(language = "python", code, inputString = "", timeoutMs = 40
       const srcPath = path.join(tmpDir, `${className}.java`);
       fs.writeFileSync(srcPath, adjustedCode);
 
-      exec(`javac "${srcPath}"`, { timeout: 5000 }, (compileErr, compStdout, compStderr) => {
+      exec(`javac "${srcPath}"`, { timeout: 15000 }, (compileErr, compStdout, compStderr) => {
         if (compileErr) {
           cleanup();
           return resolve({

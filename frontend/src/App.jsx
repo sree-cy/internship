@@ -18,11 +18,16 @@ import ForgotPassword from "./ForgotPassword";
 import VerifyResetOTP from "./VerifyResetOTP";
 import ResetPassword from "./ResetPassword";
 import Home from "./Home";
+import LandingPage from "./LandingPage";
+import Profile from "./Profile";
+import Progress from "./Progress";
+import Reports from "./Reports";
+import Achievements from "./Achievements";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/verify-email" element={<VerifyEmail />} />
@@ -30,6 +35,11 @@ function App() {
       <Route path="/verify-reset-otp" element={<VerifyResetOTP />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/dashboard" element={<Navigate to="/home" replace />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/progress" element={<Progress />} />
+      <Route path="/reports" element={<Reports />} />
+      <Route path="/achievements" element={<Achievements />} />
 
       {/* Redirect /practice to Round 1 */}
       <Route path="/practice" element={<Navigate to="/aptitude" replace />} />

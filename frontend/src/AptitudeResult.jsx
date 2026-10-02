@@ -67,12 +67,79 @@ function AptitudeResult() {
 
         <div className="badge">{badge}</div>
 
-        <button
-          className="dashboard-btn"
-          onClick={() => navigate("/home")}
-        >
-          Back to Dashboard
-        </button>
+        <div className="result-actions-column" style={{ display: "flex", flexDirection: "column", gap: "12px", width: "100%" }}>
+          <button
+            type="button"
+            className="dashboard-btn"
+            onClick={() => navigate("/dsa")}
+            style={{ fontWeight: "700" }}
+          >
+            Proceed to Round 2 (Technical DSA) →
+          </button>
+
+          <div style={{ display: "flex", gap: "10px", width: "100%" }}>
+            <button
+              type="button"
+              style={{
+                flex: 1,
+                padding: "12px",
+                borderRadius: "12px",
+                border: "1.5px solid var(--primary-green-border, #bbf7d0)",
+                background: "var(--primary-green-subtle, #f0fdf4)",
+                color: "var(--primary-green-dark, #15803d)",
+                fontWeight: "600",
+                fontSize: "13.5px",
+                cursor: "pointer",
+              }}
+              onClick={() =>
+                navigate("/aptitude/review", {
+                  state: {
+                    questions: state.questions || [],
+                    answers: state.answers || {},
+                  },
+                })
+              }
+            >
+              📖 Review Answers
+            </button>
+
+            <button
+              type="button"
+              style={{
+                flex: 1,
+                padding: "12px",
+                borderRadius: "12px",
+                border: "1.5px solid var(--border, #e2e8f0)",
+                background: "#ffffff",
+                color: "var(--text-primary, #0f172a)",
+                fontWeight: "600",
+                fontSize: "13.5px",
+                cursor: "pointer",
+              }}
+              onClick={() => navigate("/progress")}
+            >
+              📊 View Progress
+            </button>
+          </div>
+
+          <button
+            type="button"
+            style={{
+              width: "100%",
+              padding: "11px",
+              borderRadius: "12px",
+              border: "1px solid var(--border, #e2e8f0)",
+              background: "transparent",
+              color: "var(--text-secondary, #64748b)",
+              fontWeight: "600",
+              fontSize: "13px",
+              cursor: "pointer",
+            }}
+            onClick={() => navigate("/home")}
+          >
+            ← Back to Dashboard
+          </button>
+        </div>
       </div>
     </div>
   );

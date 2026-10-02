@@ -233,6 +233,13 @@ function DSAResult() {
           <button
             type="button"
             className="primary-btn"
+            onClick={() => navigate("/progress")}
+          >
+            📊 View Progress &amp; Reports →
+          </button>
+          <button
+            type="button"
+            className="secondary-btn"
             onClick={() => navigate("/home")}
           >
             ← Back to Dashboard

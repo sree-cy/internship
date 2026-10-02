@@ -8,6 +8,9 @@ const {
   forgotPassword,
   verifyResetOTP,
   resetPassword,
+  getUserProfile,
+  updateUserProfile,
+  getUserAnalytics,
 } = require("../controllers/authController");
 
 const { googleAuth, getGoogleClientId } = require("../controllers/googleAuthController");
@@ -30,5 +33,15 @@ router.post("/google", googleAuth);
 router.post("/forgot-password", forgotPassword);
 router.post("/verify-reset-otp", verifyResetOTP);
 router.post("/reset-password", resetPassword);
+
+// Profile
+router.get("/profile", getUserProfile);
+router.put("/profile", updateUserProfile);
+
+// Progress, Reports & Achievements (Real MongoDB Attempt Data)
+router.get("/progress", getUserAnalytics);
+router.get("/reports", getUserAnalytics);
+router.get("/achievements", getUserAnalytics);
+router.get("/analytics", getUserAnalytics);
 
 module.exports = router;

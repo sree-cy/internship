@@ -217,36 +217,34 @@ function Login() {
       <div className="login-left">
 
         {/* Logo */}
-
-        <div className="brand">
-
+        <div
+          className="brand"
+          onClick={() => navigate("/")}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") navigate("/");
+          }}
+        >
           <div className="brand-icon">
             PG
           </div>
-
           <span>PrepGo</span>
-
         </div>
 
+        {/* Illustration Image */}
+        <div className="login-image-container">
+          <img
+            src="/prepgo-login-image.jpeg"
+            alt="PrepGo Interview Preparation"
+            className="login-hero-image"
+          />
+        </div>
 
-        {/* Hero */}
-
-        <div className="hero-content">
-
-          <h1>
-            Prepare Smarter.
-            <br />
-
-            <span>
-              Grow Faster.
-            </span>
-          </h1>
-
-          <p>
-            Practice interviews, improve your skills and
-            discover opportunities with PrepGo.
-          </p>
-
+        {/* Footer Tagline */}
+        <div className="login-left-footer">
+          <span className="login-badge-pill">✨ AI-Powered Placement Prep</span>
+          <p>Where Practice Meets Opportunity</p>
         </div>
 
       </div>

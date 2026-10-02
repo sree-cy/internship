@@ -29,12 +29,15 @@ function ForgotPassword() {
         email: email.trim().toLowerCase(),
       });
 
-      setSuccessMsg(response.data.message || "OTP sent to your email!");
+      setSuccessMsg("Verification code sent to your email.");
 
       // Transition to Verify Reset OTP
       setTimeout(() => {
         navigate("/verify-reset-otp", {
-          state: { email: email.trim().toLowerCase() },
+          state: {
+            email: email.trim().toLowerCase(),
+            message: "Verification code sent to your email.",
+          },
         });
       }, 1200);
 
@@ -89,7 +92,7 @@ function ForgotPassword() {
             className="auth-primary-btn"
             disabled={loading || !email.trim()}
           >
-            {loading ? "Sending OTP..." : "Send Reset Code →"}
+            {loading ? "Sending verification code..." : "Send Reset Code →"}
           </button>
         </form>
 

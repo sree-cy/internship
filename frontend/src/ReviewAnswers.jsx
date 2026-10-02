@@ -5,7 +5,34 @@ function ReviewAnswers() {
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  const { questions, answers } = state;
+  if (!state || !state.questions) {
+    return (
+      <div className="review-page">
+        <div className="review-card" style={{ textAlign: "center", padding: "40px 20px" }}>
+          <h2>No Review Answers Found</h2>
+          <p style={{ color: "#64748b", margin: "12px 0 24px" }}>
+            Please complete an aptitude test assessment to review detailed answers.
+          </p>
+          <button
+            style={{
+              padding: "10px 20px",
+              background: "var(--primary-green, #16a34a)",
+              color: "#ffffff",
+              border: "none",
+              borderRadius: "10px",
+              fontWeight: "600",
+              cursor: "pointer",
+            }}
+            onClick={() => navigate("/aptitude")}
+          >
+            Go to Aptitude Assessment
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const { questions, answers = {} } = state;
 
   return (
     <div className="review-page">
