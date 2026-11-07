@@ -63,4 +63,6 @@ const dsaQuestionSchema = new mongoose.Schema(
   }
 );
 
+dsaQuestionSchema.index({ difficulty: 1 });
+
 module.exports = mongoose.model("DSAQuestion", dsaQuestionSchema);

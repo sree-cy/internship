@@ -38,4 +38,7 @@ const aptitudeAttemptSchema = new mongoose.Schema(
   }
 );
 
+aptitudeAttemptSchema.index({ userId: 1, completedAt: -1 });
+aptitudeAttemptSchema.index({ difficulty: 1 });
+
 module.exports = mongoose.model("AptitudeAttempt", aptitudeAttemptSchema);

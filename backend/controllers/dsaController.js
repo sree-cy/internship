@@ -39,13 +39,138 @@ function areOutputsEquivalent(actual, expected) {
 }
 
 // =========================================================================
+// SECURITY STATIC CODE ANALYSIS SCANNER
+// Blocks unauthorized system calls, process spawning, file/socket operations
+// =========================================================================
+function validateCodeSafety(language, code) {
+  const lang = (language || "python").toLowerCase();
+
+  // Prohibited general patterns
+  const forbiddenGeneral = [
+    /\/etc\/passwd/i,
+    /\/etc\/shadow/i,
+    /\/dev\/tcp/i,
+    /\.env/i,
+    /curl\s+/i,
+    /wget\s+/i,
+  ];
+
+  for (const regex of forbiddenGeneral) {
+    if (regex.test(code)) {
+      return {
+        safe: false,
+        reason: "Security Violation: Prohibited network or sensitive file access detected.",
+      };
+    }
+  }
+
+  // Prohibited Python patterns
+  if (lang.includes("python")) {
+    const forbiddenPython = [
+      /\bimport\s+os\b/,
+      /\bfrom\s+os\b/,
+      /\bimport\s+subprocess\b/,
+      /\bfrom\s+subprocess\b/,
+      /\bimport\s+shutil\b/,
+      /\bimport\s+socket\b/,
+      /\bimport\s+pty\b/,
+      /\b__import__\b/,
+      /\bopen\s*\(/,
+      /\beval\s*\(/,
+      /\bexec\s*\(/,
+      /\bgetattr\b/,
+      /\bsetattr\b/,
+      /\bbuiltins\b/,
+      /\bos\.environ\b/,
+      /\bos\.system\b/,
+    ];
+
+    for (const pattern of forbiddenPython) {
+      if (pattern.test(code)) {
+        return {
+          safe: false,
+          reason: "Security Violation: Prohibited Python system module or call detected.",
+        };
+      }
+    }
+  }
+
+  // Prohibited C & C++ patterns
+  if (lang === "c" || lang === "cpp" || lang === "cpp17" || lang === "c++") {
+    const forbiddenC = [
+      /<sys\//i,
+      /<unistd\.h>/i,
+      /<windows\.h>/i,
+      /\bsystem\s*\(/i,
+      /\bfork\s*\(/i,
+      /\bexec[lvpe]*\s*\(/i,
+      /\bpopen\s*\(/i,
+      /\bfopen\s*\(/i,
+      /\bremove\s*\(/i,
+      /\bsocket\s*\(/i,
+    ];
+
+    for (const pattern of forbiddenC) {
+      if (pattern.test(code)) {
+        return {
+          safe: false,
+          reason: "Security Violation: Prohibited C/C++ system header or function detected.",
+        };
+      }
+    }
+  }
+
+  // Prohibited Java patterns
+  if (lang.includes("java")) {
+    const forbiddenJava = [
+      /Runtime\.getRuntime/i,
+      /ProcessBuilder/i,
+      /java\.io\.File/i,
+      /java\.net/i,
+      /System\.exit/i,
+      /FileInputStream/i,
+      /FileOutputStream/i,
+    ];
+
+    for (const pattern of forbiddenJava) {
+      if (pattern.test(code)) {
+        return {
+          safe: false,
+          reason: "Security Violation: Prohibited Java process or network class detected.",
+        };
+      }
+    }
+  }
+
+  return { safe: true };
+}
+
+// =========================================================================
 // MULTI-LANGUAGE CODE EXECUTION ENGINE
 // Supports: Python 3, C, C++17, Java 17
 // =========================================================================
 function executeCode(language = "python", code, inputString = "", timeoutMs = 4000) {
   return new Promise((resolve) => {
+    // 1. Static Security Scan
+    const safety = validateCodeSafety(language, code);
+    if (!safety.safe) {
+      return resolve({
+        success: false,
+        output: "",
+        error: safety.reason,
+      });
+    }
+
     const lang = (language || "python").toLowerCase();
     const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "prepgo-exec-"));
+
+    // Isolated sanitized environment - NEVER expose server environment variables!
+    const sanitizedEnv = {
+      PATH: process.env.PATH,
+      HOME: tmpDir,
+      TMPDIR: tmpDir,
+      LANG: "en_US.UTF-8",
+    };
 
     const cleanup = () => {
       try {
@@ -59,8 +184,12 @@ function executeCode(language = "python", code, inputString = "", timeoutMs = 40
       let isTimedOut = false;
       let stdout = "";
       let stderr = "";
+      const MAX_OUTPUT_BYTES = 64 * 1024; // 64 KB maximum buffer
 
-      const child = spawn(cmd, args, { cwd: tmpDir });
+      const child = spawn(cmd, args, {
+        cwd: tmpDir,
+        env: sanitizedEnv,
+      });
 
       const timer = setTimeout(() => {
         isTimedOut = true;
@@ -85,11 +214,15 @@ function executeCode(language = "python", code, inputString = "", timeoutMs = 40
       }
 
       child.stdout.on("data", (d) => {
-        stdout += d.toString();
+        if (stdout.length < MAX_OUTPUT_BYTES) {
+          stdout += d.toString();
+        }
       });
 
       child.stderr.on("data", (d) => {
-        stderr += d.toString();
+        if (stderr.length < MAX_OUTPUT_BYTES) {
+          stderr += d.toString();
+        }
       });
 
       child.on("close", (exitCode) => {
@@ -130,13 +263,19 @@ function executeCode(language = "python", code, inputString = "", timeoutMs = 40
       return runProcess("python3", [scriptPath], inputString);
     }
 
+    const compileOptions = {
+      timeout: 12000,
+      cwd: tmpDir,
+      env: sanitizedEnv,
+    };
+
     // 2. C (GCC)
     if (lang === "c") {
       const srcPath = path.join(tmpDir, "solution.c");
       const binPath = path.join(tmpDir, "solution");
       fs.writeFileSync(srcPath, code);
 
-      exec(`gcc "${srcPath}" -o "${binPath}" -lm`, { timeout: 12000 }, (compileErr, compStdout, compStderr) => {
+      exec(`gcc "${srcPath}" -o "${binPath}" -lm`, compileOptions, (compileErr, compStdout, compStderr) => {
         if (compileErr) {
           cleanup();
           return resolve({
@@ -156,7 +295,7 @@ function executeCode(language = "python", code, inputString = "", timeoutMs = 40
       const binPath = path.join(tmpDir, "solution");
       fs.writeFileSync(srcPath, code);
 
-      exec(`g++ -std=c++17 "${srcPath}" -o "${binPath}"`, { timeout: 12000 }, (compileErr, compStdout, compStderr) => {
+      exec(`g++ -std=c++17 "${srcPath}" -o "${binPath}"`, compileOptions, (compileErr, compStdout, compStderr) => {
         if (compileErr) {
           cleanup();
           return resolve({
@@ -172,7 +311,6 @@ function executeCode(language = "python", code, inputString = "", timeoutMs = 40
 
     // 4. JAVA 17
     if (lang === "java" || lang === "java17") {
-      // Ensure class name matches file or default to Main
       let adjustedCode = code;
       let className = "Main";
       const match = code.match(/public\s+class\s+([A-Za-z0-9_]+)/);
@@ -185,7 +323,7 @@ function executeCode(language = "python", code, inputString = "", timeoutMs = 40
       const srcPath = path.join(tmpDir, `${className}.java`);
       fs.writeFileSync(srcPath, adjustedCode);
 
-      exec(`javac "${srcPath}"`, { timeout: 15000 }, (compileErr, compStdout, compStderr) => {
+      exec(`javac "${srcPath}"`, compileOptions, (compileErr, compStdout, compStderr) => {
         if (compileErr) {
           cleanup();
           return resolve({
@@ -500,9 +638,11 @@ const submitDSATest = async (req, res) => {
       totalScore
     );
 
+    const attemptUserId = req.user?._id || userId || null;
+
     // Save into dsaAttempts collection
     const attempt = await DSAAttempt.create({
-      userId: userId || null,
+      userId: attemptUserId,
       difficulty: diff,
       language,
       selectedQuestions: questions.map((q) => q._id),
@@ -548,20 +688,20 @@ const submitDSATest = async (req, res) => {
 const getLatestDSAAttempt = async (req, res) => {
   try {
     const { userId } = req.query;
+    const targetUserId = req.user?._id || userId;
     let query = {};
-    if (userId) {
-      query.userId = userId;
+    if (targetUserId) {
+      query.userId = targetUserId;
+    } else {
+      return res.status(200).json({
+        success: true,
+        attempt: null,
+      });
     }
 
-    let latest = await DSAAttempt.findOne(query)
+    const latest = await DSAAttempt.findOne(query)
       .sort({ completedAt: -1, createdAt: -1 })
       .populate("userId", "name email");
-
-    if (!latest && userId) {
-      latest = await DSAAttempt.findOne({})
-        .sort({ completedAt: -1, createdAt: -1 })
-        .populate("userId", "name email");
-    }
 
     return res.status(200).json({
       success: true,

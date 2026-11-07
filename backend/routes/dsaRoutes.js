@@ -6,15 +6,17 @@ const {
   submitDSATest,
   getLatestDSAAttempt,
 } = require("../controllers/dsaController");
+const { optionalAuth } = require("../middleware/authMiddleware");
+const { executionLimiter } = require("../middleware/rateLimiter");
 
 // Latest attempt
-router.get("/latest-attempt", getLatestDSAAttempt);
+router.get("/latest-attempt", optionalAuth, getLatestDSAAttempt);
 
-// Run code against test cases
-router.post("/run", runDSACode);
+// Run code against test cases (Rate limited to prevent execution floods)
+router.post("/run", executionLimiter, runDSACode);
 
 // Submit test
-router.post("/submit", submitDSATest);
+router.post("/submit", optionalAuth, submitDSATest);
 
 // Get questions by difficulty
 router.get("/:difficulty", getDSAQuestionsByDifficulty);

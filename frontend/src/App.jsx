@@ -23,6 +23,7 @@ import Profile from "./Profile";
 import Progress from "./Progress";
 import Reports from "./Reports";
 import Achievements from "./Achievements";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   return (
@@ -34,28 +35,128 @@ function App() {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/verify-reset-otp" element={<VerifyResetOTP />} />
       <Route path="/reset-password" element={<ResetPassword />} />
-      <Route path="/home" element={<Home />} />
+
+      {/* Protected Candidate Workspace Routes */}
+      <Route
+        path="/home"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/dashboard" element={<Navigate to="/home" replace />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/progress" element={<Progress />} />
-      <Route path="/reports" element={<Reports />} />
-      <Route path="/achievements" element={<Achievements />} />
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/progress"
+        element={
+          <ProtectedRoute>
+            <Progress />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/reports"
+        element={
+          <ProtectedRoute>
+            <Reports />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/achievements"
+        element={
+          <ProtectedRoute>
+            <Achievements />
+          </ProtectedRoute>
+        }
+      />
 
       {/* Redirect /practice to Round 1 */}
       <Route path="/practice" element={<Navigate to="/aptitude" replace />} />
 
       {/* Round 1 (Aptitude) */}
-      <Route path="/aptitude" element={<AptitudeHome />} />
-      <Route path="/aptitude/instructions/:level" element={<AptitudeInstructions />} />
-      <Route path="/aptitude/test/:level" element={<AptitudeTest />} />
-      <Route path="/aptitude/result" element={<AptitudeResult />} />
-      <Route path="/aptitude/review" element={<ReviewAnswers />} />
+      <Route
+        path="/aptitude"
+        element={
+          <ProtectedRoute>
+            <AptitudeHome />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/aptitude/instructions/:level"
+        element={
+          <ProtectedRoute>
+            <AptitudeInstructions />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/aptitude/test/:level"
+        element={
+          <ProtectedRoute>
+            <AptitudeTest />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/aptitude/result"
+        element={
+          <ProtectedRoute>
+            <AptitudeResult />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/aptitude/review"
+        element={
+          <ProtectedRoute>
+            <ReviewAnswers />
+          </ProtectedRoute>
+        }
+      />
 
       {/* Round 2 (DSA) */}
-      <Route path="/dsa" element={<DSAHome />} />
-      <Route path="/dsa/instructions/:level" element={<DSAInstructions />} />
-      <Route path="/dsa/test/:level" element={<DSATest />} />
-      <Route path="/dsa/result" element={<DSAResult />} />
+      <Route
+        path="/dsa"
+        element={
+          <ProtectedRoute>
+            <DSAHome />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dsa/instructions/:level"
+        element={
+          <ProtectedRoute>
+            <DSAInstructions />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dsa/test/:level"
+        element={
+          <ProtectedRoute>
+            <DSATest />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dsa/result"
+        element={
+          <ProtectedRoute>
+            <DSAResult />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 }

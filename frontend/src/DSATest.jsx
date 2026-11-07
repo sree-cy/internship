@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_ENDPOINTS, getAuthHeaders } from "./config/api";
 import "./DSATest.css";
 
 const DEFAULT_STARTER_CODES = {
@@ -105,7 +106,7 @@ function DSATest() {
         setLoading(true);
         // GET /api/dsa/:difficulty returns random 2 questions
         const res = await axios.get(
-          `http://localhost:5000/api/dsa/${level.toLowerCase()}`
+          `${API_ENDPOINTS.DSA}/${level.toLowerCase()}`
         );
 
         if (res.data && res.data.questions && res.data.questions.length > 0) {
@@ -278,11 +279,11 @@ function DSATest() {
       setRunningCode(true);
       setActiveTab("results");
 
-      const res = await axios.post("http://localhost:5000/api/dsa/run", {
+      const res = await axios.post(`${API_ENDPOINTS.DSA}/run`, {
         questionId: currentQ._id,
         code: currentCode,
         language: selectedLanguage,
-      });
+      }, { headers: getAuthHeaders() });
 
       setRunResults(res.data);
     } catch (err) {
@@ -312,11 +313,11 @@ function DSATest() {
       setActiveTab("results");
 
       // Run code against sample cases
-      const res = await axios.post("http://localhost:5000/api/dsa/run", {
+      const res = await axios.post(`${API_ENDPOINTS.DSA}/run`, {
         questionId: currentQ._id,
         code: currentCode,
         language: selectedLanguage,
-      });
+      }, { headers: getAuthHeaders() });
 
       const data = res.data;
       setRunResults(data);
@@ -353,13 +354,17 @@ function DSATest() {
         };
       });
 
-      const res = await axios.post("http://localhost:5000/api/dsa/submit", {
-        difficulty: level.toLowerCase(),
-        language: selectedLanguage,
-        answers: answersPayload,
-        userId: user?.id || user?._id || null,
-        timeUsed,
-      });
+      const res = await axios.post(
+        `${API_ENDPOINTS.DSA}/submit`,
+        {
+          difficulty: level.toLowerCase(),
+          language: selectedLanguage,
+          answers: answersPayload,
+          userId: user?.id || user?._id || null,
+          timeUsed,
+        },
+        { headers: getAuthHeaders() }
+      );
 
       const data = res.data;
 

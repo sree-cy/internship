@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_ENDPOINTS } from "./config/api";
 import "./Profile.css";
 
-const API_BASE = "http://localhost:5000/api/auth";
+const API_BASE = API_ENDPOINTS.AUTH;
 
 function Profile() {
   const navigate = useNavigate();

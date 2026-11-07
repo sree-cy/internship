@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_ENDPOINTS, getAuthHeaders } from "./config/api";
 import "./AptitudeTest.css";
 
 function AptitudeTest() {
@@ -37,7 +38,7 @@ function AptitudeTest() {
       try {
         setLoading(true);
         const res = await axios.get(
-          `http://localhost:5000/api/aptitude/${level.toLowerCase()}`
+          `${API_ENDPOINTS.APTITUDE}/${level.toLowerCase()}`
         );
         if (res.data && res.data.questions && res.data.questions.length > 0) {
           setQuestions(res.data.questions);
@@ -70,11 +71,15 @@ function AptitudeTest() {
         }
       }
 
-      const res = await axios.post("http://localhost:5000/api/aptitude/submit", {
-        difficulty: level.toLowerCase(),
-        answers: currentAnswers,
-        userId,
-      });
+      const res = await axios.post(
+        `${API_ENDPOINTS.APTITUDE}/submit`,
+        {
+          difficulty: level.toLowerCase(),
+          answers: currentAnswers,
+          userId,
+        },
+        { headers: getAuthHeaders() }
+      );
 
       const data = res.data;
 

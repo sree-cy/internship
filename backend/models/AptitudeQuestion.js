@@ -46,4 +46,6 @@ const aptitudeQuestionSchema = new mongoose.Schema(
   }
 );
 
+aptitudeQuestionSchema.index({ difficulty: 1 });
+
 module.exports = mongoose.model("AptitudeQuestion", aptitudeQuestionSchema);

@@ -80,9 +80,11 @@ const submitAptitudeTest = async (req, res) => {
     const maxScore = totalQuestions * 3;
     const percentage = Math.round((score / maxScore) * 100);
 
+    const attemptUserId = req.user?._id || userId || null;
+
     // Save test attempt
     const attempt = await AptitudeAttempt.create({
-      userId: userId || null,
+      userId: attemptUserId,
       difficulty: diff,
       answers,
       score,
@@ -129,22 +131,21 @@ const getLatestAttempt = async (req, res) => {
   try {
     const { userId } = req.query;
 
+    const targetUserId = req.user?._id || userId;
+
     let query = {};
-    if (userId) {
-      query.userId = userId;
+    if (targetUserId) {
+      query.userId = targetUserId;
+    } else {
+      return res.status(200).json({
+        success: true,
+        attempt: null,
+      });
     }
 
-    // Try finding by user first if provided
-    let latest = await AptitudeAttempt.findOne(query)
+    const latest = await AptitudeAttempt.findOne(query)
       .sort({ completedAt: -1, createdAt: -1 })
       .populate("userId", "name email");
-
-    // If no attempt found for this specific user, fetch the latest attempt overall as fallback
-    if (!latest && userId) {
-      latest = await AptitudeAttempt.findOne({})
-        .sort({ completedAt: -1, createdAt: -1 })
-        .populate("userId", "name email");
-    }
 
     return res.status(200).json({
       success: true,

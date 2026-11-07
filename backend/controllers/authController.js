@@ -623,22 +623,9 @@ const loginUser = async (req, res) => {
 // =========================
 const getUserProfile = async (req, res) => {
   try {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return res.status(401).json({ message: "Authentication required" });
-    }
-
-    const token = authHeader.split(" ")[1];
-    let decoded;
-    try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET);
-    } catch (err) {
-      return res.status(401).json({ message: "Invalid or expired token" });
-    }
-
-    const user = await User.findById(decoded.userId).select("-password -otp -otpExpiry -resetOtp -resetOtpExpiry");
+    const user = req.user;
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(401).json({ message: "Authentication required" });
     }
 
     res.status(200).json({
@@ -669,22 +656,9 @@ const getUserProfile = async (req, res) => {
 // =========================
 const updateUserProfile = async (req, res) => {
   try {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return res.status(401).json({ message: "Authentication required" });
-    }
-
-    const token = authHeader.split(" ")[1];
-    let decoded;
-    try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET);
-    } catch (err) {
-      return res.status(401).json({ message: "Invalid or expired token" });
-    }
-
-    const user = await User.findById(decoded.userId);
+    const user = req.user;
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(401).json({ message: "Authentication required" });
     }
 
     const { name, phone, education, targetRole, skillLevel, preferredLanguage } = req.body;
@@ -754,28 +728,16 @@ const updateUserProfile = async (req, res) => {
 // =========================================================================
 const getUserAnalytics = async (req, res) => {
   try {
-    let userId = null;
-    const authHeader = req.headers.authorization;
-    if (authHeader && authHeader.startsWith("Bearer ")) {
-      try {
-        const decoded = jwt.verify(authHeader.split(" ")[1], process.env.JWT_SECRET);
-        userId = decoded.userId;
-      } catch (err) {
-        // Fall back to query param
-      }
+    const user = req.user;
+    if (!user) {
+      return res.status(401).json({ success: false, message: "Authentication required." });
     }
 
-    if (!userId && req.query.userId) {
-      userId = req.query.userId;
-    }
+    const userObj = user;
+    const userId = user._id;
 
-    let userObj = null;
-    if (userId) {
-      userObj = await User.findById(userId).select("name email skillLevel targetRole preferredLanguage");
-    }
-
-    // Build query for user attempts
-    const userQuery = userId ? { userId } : {};
+    // Secure query strictly scoped to this authenticated user
+    const userQuery = { userId };
 
     // Fetch user aptitude attempts
     let aptitudeAttempts = await AptitudeAttempt.find(userQuery).sort({ completedAt: -1, createdAt: -1 });

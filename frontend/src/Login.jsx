@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { API_ENDPOINTS } from "./config/api";
 import "./Login.css";
 
 function Login() {
@@ -24,7 +25,7 @@ function Login() {
 
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/auth/google", {
+      const res = await fetch(`${API_ENDPOINTS.AUTH}/google`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,7 +68,7 @@ function Login() {
     const fetchClientId = async () => {
       if (googleClientId && googleClientId !== "your_google_client_id") return;
       try {
-        const res = await fetch("http://localhost:5000/api/auth/google-client-id");
+        const res = await fetch(`${API_ENDPOINTS.AUTH}/google-client-id`);
         const data = await res.json();
         if (data.clientId) {
           setGoogleClientId(data.clientId);
@@ -152,7 +153,7 @@ function Login() {
       setLoading(true);
 
       const response = await fetch(
-        "http://localhost:5000/api/auth/login",
+        `${API_ENDPOINTS.AUTH}/login`,
         {
           method: "POST",
           headers: {

@@ -5,13 +5,14 @@ const {
   submitAptitudeTest,
   getLatestAttempt,
 } = require("../controllers/aptitudeController");
+const { optionalAuth } = require("../middleware/authMiddleware");
 
-// Latest attempt routes
-router.get("/latest-attempt", getLatestAttempt);
-router.get("/attempts/latest", getLatestAttempt);
+// Latest attempt routes (Optional JWT binding)
+router.get("/latest-attempt", optionalAuth, getLatestAttempt);
+router.get("/attempts/latest", optionalAuth, getLatestAttempt);
 
-// Submit test route
-router.post("/submit", submitAptitudeTest);
+// Submit test route (Optional JWT binding)
+router.post("/submit", optionalAuth, submitAptitudeTest);
 
 // Get questions by difficulty route
 router.get("/:difficulty", getQuestionsByDifficulty);

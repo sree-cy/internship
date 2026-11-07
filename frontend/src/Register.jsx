@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_ENDPOINTS } from "./config/api";
 import "./Register.css";
 
 function Register() {
@@ -16,7 +17,7 @@ function Register() {
 
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/auth/google", {
+      const res = await fetch(`${API_ENDPOINTS.AUTH}/google`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +60,7 @@ function Register() {
     const fetchClientId = async () => {
       if (googleClientId && googleClientId !== "your_google_client_id") return;
       try {
-        const res = await fetch("http://localhost:5000/api/auth/google-client-id");
+        const res = await fetch(`${API_ENDPOINTS.AUTH}/google-client-id`);
         const data = await res.json();
         if (data.clientId) {
           setGoogleClientId(data.clientId);
@@ -150,7 +151,7 @@ function Register() {
       setLoading(true);
 
       const response = await fetch(
-        "http://localhost:5000/api/auth/register",
+        `${API_ENDPOINTS.AUTH}/register`,
         {
           method: "POST",
           headers: {

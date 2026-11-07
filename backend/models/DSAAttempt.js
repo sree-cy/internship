@@ -68,4 +68,7 @@ const dsaAttemptSchema = new mongoose.Schema(
   }
 );
 
+dsaAttemptSchema.index({ userId: 1, completedAt: -1 });
+dsaAttemptSchema.index({ difficulty: 1 });
+
 module.exports = mongoose.model("DSAAttempt", dsaAttemptSchema);

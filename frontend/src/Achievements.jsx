@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_ENDPOINTS, getAuthHeaders } from "./config/api";
 import "./Achievements.css";
 
 function Achievements() {
@@ -29,12 +30,9 @@ function Achievements() {
         const token = localStorage.getItem("prepgoToken");
         const userId = storedUser?.id || storedUser?._id;
 
-        const headers = token ? { Authorization: `Bearer ${token}` } : {};
-        const url = userId
-          ? `http://localhost:5000/api/auth/achievements?userId=${userId}`
-          : `http://localhost:5000/api/auth/achievements`;
-
-        const res = await axios.get(url, { headers });
+        const res = await axios.get(`${API_ENDPOINTS.AUTH}/achievements`, {
+          headers: getAuthHeaders(),
+        });
         if (res.data && res.data.success) {
           setAnalytics(res.data.data);
         } else {
