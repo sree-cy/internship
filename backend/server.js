@@ -16,36 +16,91 @@ const { apiLimiter } = require("./middleware/rateLimiter");
 const app = express();
 
 // Security Headers
-app.use(helmet());
-
-// Production CORS Configuration
-const allowedOrigins = process.env.ALLOWED_ORIGINS
-  ? process.env.ALLOWED_ORIGINS.split(",").map((origin) => origin.trim())
-  : [
-      "http://localhost:5173",
-      "http://127.0.0.1:5173",
-      "http://localhost:3000",
-    ];
-
 app.use(
-  cors({
-    origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl, or server-to-server)
-      if (!origin) return callback(null, true);
-      if (
-        allowedOrigins.includes("*") ||
-        allowedOrigins.includes(origin) ||
-        process.env.NODE_ENV !== "production"
-      ) {
-        return callback(null, true);
-      }
-      return callback(new Error(`CORS policy blocked access from origin: ${origin}`));
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+  helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
   })
 );
+
+// Explicit list of allowed frontend origins
+const defaultAllowedOrigins = [
+  "https://prepgo-alpha.vercel.app",
+  "https://prepgo-6133hj6fo-sree1.vercel.app",
+  "https://prepgo.vercel.app",
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "http://localhost:3000",
+];
+
+// Additional origins configured via environment variable
+const envOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(",")
+      .map((origin) => origin.trim().replace(/\/+$/, ""))
+      .filter(Boolean)
+  : [];
+
+const allowedOriginsSet = new Set([
+  ...defaultAllowedOrigins,
+  ...envOrigins,
+]);
+
+/**
+ * Strict origin validator:
+ * 1. Allows non-browser requests (mobile apps, curl, server-to-server) where origin is undefined.
+ * 2. Checks exact matches in allowedOriginsSet.
+ * 3. Restricts dynamic Vercel previews specifically to legitimate PrepGo deployment domains (HTTPS only).
+ */
+const isOriginAllowed = (origin) => {
+  if (!origin) return true;
+
+  const normalizedOrigin = origin.trim().replace(/\/+$/, "");
+
+  // Check exact matches
+  if (allowedOriginsSet.has(normalizedOrigin)) {
+    return true;
+  }
+
+  // Validate legitimate PrepGo Vercel deployment and preview subdomains
+  try {
+    const parsedUrl = new URL(normalizedOrigin);
+    if (parsedUrl.protocol === "https:") {
+      const hostname = parsedUrl.hostname.toLowerCase();
+      // Matches prepgo.vercel.app, prepgo-alpha.vercel.app, prepgo-6133hj6fo-sree1.vercel.app, etc.
+      // Rejects arbitrary domains, unencrypted HTTP, or malicious domains pretending to be prepgo.
+      const isPrepGoVercelDomain = /^prepgo(-[a-z0-9-]+)?\.vercel\.app$/i.test(hostname);
+      if (isPrepGoVercelDomain) {
+        return true;
+      }
+    }
+  } catch {
+    return false;
+  }
+
+  return false;
+};
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (isOriginAllowed(origin)) {
+      return callback(null, true);
+    }
+    // Disallow origin gracefully without throwing an unhandled server error
+    return callback(null, false);
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "X-Requested-With",
+    "Accept",
+    "Origin",
+  ],
+  optionsSuccessStatus: 200, // Legacy browser compatibility for preflight OPTIONS responses
+};
+
+// Register CORS middleware before all API routes & rate limiters
+app.use(cors(corsOptions));
 
 app.use(express.json({ limit: "1mb" }));
 app.use("/api", apiLimiter);
