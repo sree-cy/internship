@@ -32,7 +32,9 @@ function Home() {
     navigate("/progress");
   };
 
-  const userName = user?.name || "Candidate";
+  const rawName = user?.name?.trim() || "";
+  const displayName = rawName || "User";
+  const displayAvatar = displayName.charAt(0).toUpperCase();
 
   return (
     <div className="dash-container">
@@ -48,48 +50,8 @@ function Home() {
             </div>
           </div>
 
-          {/* Navigation Items: Horizontal list */}
+          {/* Navigation Items: Reports & Achievements */}
           <nav className="dash-nav-items">
-            <button
-              type="button"
-              className="dash-nav-btn"
-              onClick={() => navigate("/aptitude")}
-            >
-              <span className="dash-nav-num">01</span> Round 1
-            </button>
-
-            <button
-              type="button"
-              className="dash-nav-btn"
-              onClick={() => navigate("/dsa")}
-            >
-              <span className="dash-nav-num">02</span> Round 2
-            </button>
-
-            <button
-              type="button"
-              className="dash-nav-btn nav-btn-muted"
-              onClick={() => alert("Round 3 (HR Interview) is coming soon!")}
-            >
-              <span className="dash-nav-num">03</span> Round 3
-            </button>
-
-            <button
-              type="button"
-              className="dash-nav-btn"
-              onClick={handleProfileClick}
-            >
-              Profile
-            </button>
-
-            <button
-              type="button"
-              className="dash-nav-btn"
-              onClick={handleProgressClick}
-            >
-              Progress
-            </button>
-
             <button
               type="button"
               className="dash-nav-btn"
@@ -116,9 +78,9 @@ function Home() {
               title="View & Edit Profile"
             >
               <div className="dash-user-avatar">
-                {userName.charAt(0).toUpperCase()}
+                {displayAvatar}
               </div>
-              <span className="dash-user-name">{userName}</span>
+              <span className="dash-user-name">{displayName}</span>
             </div>
 
             <button
@@ -148,51 +110,23 @@ function Home() {
             <button
               type="button"
               className="dash-mobile-btn"
-              onClick={() => { setMobileMenuOpen(false); navigate("/aptitude"); }}
-            >
-              <span>01</span> Round 1 (Aptitude)
-            </button>
-            <button
-              type="button"
-              className="dash-mobile-btn"
-              onClick={() => { setMobileMenuOpen(false); navigate("/dsa"); }}
-            >
-              <span>02</span> Round 2 (Technical / DSA)
-            </button>
-            <button
-              type="button"
-              className="dash-mobile-btn muted"
-              onClick={() => { setMobileMenuOpen(false); alert("Round 3 (HR Interview) is coming soon!"); }}
-            >
-              <span>03</span> Round 3 (HR Interview - Coming Soon)
-            </button>
-            <button
-              type="button"
-              className="dash-mobile-btn"
-              onClick={() => { setMobileMenuOpen(false); handleProfileClick(); }}
-            >
-              Profile & Settings
-            </button>
-            <button
-              type="button"
-              className="dash-mobile-btn"
-              onClick={() => { setMobileMenuOpen(false); handleProgressClick(); }}
-            >
-              Progress Dashboard
-            </button>
-            <button
-              type="button"
-              className="dash-mobile-btn"
               onClick={() => { setMobileMenuOpen(false); navigate("/reports"); }}
             >
-              Performance Reports
+              Reports
             </button>
             <button
               type="button"
               className="dash-mobile-btn"
               onClick={() => { setMobileMenuOpen(false); navigate("/achievements"); }}
             >
-              Milestones &amp; Badges
+              Achievements
+            </button>
+            <button
+              type="button"
+              className="dash-mobile-btn"
+              onClick={() => { setMobileMenuOpen(false); handleProfileClick(); }}
+            >
+              Profile &amp; Settings
             </button>
             <button
               type="button"
@@ -214,7 +148,7 @@ function Home() {
           </div>
 
           <h1 className="dash-welcome-title">
-            Good Morning, {userName} 👋
+            {rawName ? `Welcome, ${rawName} 👋` : "Welcome 👋"}
           </h1>
 
           <p className="dash-welcome-subtitle">
